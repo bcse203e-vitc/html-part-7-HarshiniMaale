@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character & Word Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #charCount, #wordCount {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #output {
+            font-size: 16px;
+            margin-top: 15px;
+            padding: 10px;
+            width: 80%;
+            display: inline-block;
+            text-align: left;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Character & Word Counter</h1>
+    <textarea id="textInput" oninput="countText()" placeholder="Type here..."></textarea>
+    <p id="charCount">Characters: 0</p>
+    <p id="wordCount">Words: 0</p>
+    <p><b>Repeated Words:</b></p>
+    <p id="output"></p>
+
+    <script>
+        function countText() {
+            let text = document.getElementById("textInput").value;
+            let charCount = text.length;
+            let words = text.toLowerCase().match(/\b\w+\b/g) || [];
+            let wordCount = words.length;
+
+            document.getElementById("charCount").textContent = `Characters: ${charCount}`;
+            document.getElementById("wordCount").textContent = `Words: ${wordCount}`;
+
+            highlightRepeatedWords(words);
+        }
+
+        function highlightRepeatedWords(words) {
+            let wordMap = {};
+            words.forEach(word => {
+                wordMap[word] = (wordMap[word] || 0) + 1;
+            });
+
+            let highlightedText = words.map(word => 
+                wordMap[word] > 1 ? `<span class="highlight">${word}</span>` : word
+            ).join(" ");
+
+            document.getElementById("output").innerHTML = highlightedText;
+        }
+    </script>
+</body>
+</html>
