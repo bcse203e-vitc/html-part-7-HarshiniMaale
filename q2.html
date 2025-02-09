@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FizzBuzz Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            width: 60px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            white-space: pre-line;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>FizzBuzz Challenge</h1>
+    <p>Define your own divisibility rules:</p>
+    <label>Divisible by: <input type="number" id="num1" value="3"></label>
+    <label>Say: <input type="text" id="word1" value="Fizz"></label><br>
+    <label>Divisible by: <input type="number" id="num2" value="5"></label>
+    <label>Say: <input type="text" id="word2" value="Buzz"></label><br>
+    <button onclick="runFizzBuzz()">Run FizzBuzz</button>
+
+    <p id="output"></p>
+
+    <script>
+        function runFizzBuzz() {
+            let num1 = parseInt(document.getElementById("num1").value);
+            let word1 = document.getElementById("word1").value;
+            let num2 = parseInt(document.getElementById("num2").value);
+            let word2 = document.getElementById("word2").value;
+            let output = "";
+
+            for (let i = 1; i <= 50; i++) {
+                let result = "";
+
+                if (i % num1 === 0) result += word1;
+                if (i % num2 === 0) result += word2;
+                if (result === "") result = i;
+
+                output += result + "\n";
+            }
+
+            document.getElementById("output").textContent = output;
+        }
+    </script>
+</body>
+</html>
