@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Second & Third Largest Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #secondLargest, #thirdLargest {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Second & Third Largest Number</h1>
+    <p>Enter numbers separated by commas:</p>
+    <input type="text" id="arrayInput" placeholder="Example: 10, 20, 4, 45, 99, 99, 30">
+    <button onclick="findLargestNumbers()">Find Numbers</button>
+
+    <p id="secondLargest"></p>
+    <p id="thirdLargest"></p>
+
+    <script>
+        function findLargestNumbers() {
+            let input = document.getElementById("arrayInput").value;
+            let arr = input.split(",").map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+
+            if (arr.length < 2) {
+                document.getElementById("secondLargest").textContent = "❌ Enter at least two numbers!";
+                document.getElementById("thirdLargest").textContent = "";
+                return;
+            }
+
+            let uniqueArr = [...new Set(arr)]; // Remove duplicates
+            uniqueArr.sort((a, b) => b - a); // Sort in descending order
+
+            let secondLargest = uniqueArr[1] !== undefined ? uniqueArr[1] : "❌ No second largest number!";
+            let thirdLargest = uniqueArr[2] !== undefined ? uniqueArr[2] : "❌ No third largest number!";
+
+            document.getElementById("secondLargest").textContent = `Second Largest: ${secondLargest}`;
+            document.getElementById("thirdLargest").textContent = `Third Largest: ${thirdLargest}`;
+        }
+    </script>
+</body>
+</html>
